@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/basic_page.dart';
 import 'package:flutter_application_1/pages/custom_page.dart';
@@ -9,24 +8,50 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.teal,
+      theme: ThemeData(
+        primaryColor: Colors.indigo,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 13, 10, 10),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Color.fromARGB(255, 255, 232, 232), backgroundColor: Color.fromARGB(255, 104, 206, 234), // text color
+            elevation: 5, // button shadow
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24), // padding
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.indigo,
+          centerTitle: true,
+          elevation: 0,
+          titleTextStyle: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.tealAccent),
       ),
       title: 'Flutter Document Scanner',
-      home: Builder(
-        builder: (context) {
-          return Scaffold(
-            body: Center(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Document Scanner'),
+          centerTitle: true,
+          backgroundColor: const Color.fromARGB(255, 4, 0, 4),
+        ),
+        body: Builder(
+          builder: (context) {
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // * Basic example page
+                  // Basic example page
                   ElevatedButton(
                     onPressed: () => Navigator.push<void>(
                       context,
@@ -35,11 +60,13 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'Basic example',
+                      'Basic Scan',
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  SizedBox(height: 16), // spacing between buttons
 
-                  // * Custom example page
+                  // Custom example page
                   ElevatedButton(
                     onPressed: () => Navigator.push<void>(
                       context,
@@ -48,11 +75,13 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'Custom example',
+                      'Custom Scan',
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  SizedBox(height: 16), // spacing between buttons
 
-                  // * From gallery example page
+                  // From gallery example page
                   ElevatedButton(
                     onPressed: () => Navigator.push<void>(
                       context,
@@ -61,14 +90,15 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'From gallery example',
+                      'From gallery',
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
                 ],
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
